@@ -1,12 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="Description" content="Boilerplate for polaris chip">
-  <base href="/">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Elements</title>
   <style>
     :root,
     html,
@@ -16,28 +14,37 @@
       font-family: sans-serif;
       background-color: #ededed;
     }
+
+    my-card {
+      margin: 16px;
+    }
+
     polaris-chip {
       margin: 16px;
     }
   </style>
-  <title>polaris-chip / my-card</title>
 </head>
 
 <body>
   <h1>polaris-chip</h1>
-  <!-- this is going to do whatever the tag's defaults are -->
   <polaris-chip title="News of record" link="https://psu.edu"></polaris-chip>
   <polaris-chip title="Faculty and Staff"></polaris-chip>
   <polaris-chip title="University Services"></polaris-chip>
   <polaris-chip title="Financial Aid"></polaris-chip>
   <polaris-chip title="About"></polaris-chip>
-  <!-- this is going to take the tag and change the title -->
   <polaris-chip title="Cool stuff"></polaris-chip>
 
   <h1>my-card</h1>
-  <my-card></my-card>
+  <my-card cardTitle="HAX at Penn State"
+         cardImage="https://upload.wikimedia.org/wikipedia/commons/3/3b/Penn_state_old_main_summer.jpg"
+         cardDescription="Penn State stands as a beacon of academic excellence."></my-card>
 
-  <!-- this is what is bringing in the definition for this tag -->
+  <my-card cardTitle="XAH at Ohio State"
+         cardImage="https://kentcollegesearch.files.wordpress.com/2012/06/img_clock-bldg07.jpg"
+         cardDescription="Ohio State stands as a beacon of dissapointment."></my-card>
+
+  <!-- Add more instances with different attributes as needed -->
+
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
 </body>

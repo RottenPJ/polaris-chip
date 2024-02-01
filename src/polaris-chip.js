@@ -1,6 +1,7 @@
 // we import JS code into this JS code. Modular javascript is a big deal
 // more modern (relatively speaking) and allows the web to feel like
 // a full blown development environment
+
 import { LitElement, html, css } from 'lit';
 
 // export means that other JS files can reference this JS file and
@@ -16,26 +17,28 @@ import { LitElement, html, css } from 'lit';
 // We will only stick with Lit for this class and look at Vanilla examples
 // but compatibility across sites / libraries is unique to web components
 // and not a thing in React, Vue, Angular, etc
+
 export class PolarisChip extends LitElement {
-  // this is not a requirement, but it's a convention I personally enjoy
+   // this is not a requirement, but it's a convention I personally enjoy
   // because it helps when looking at multiple elements. I open this file
   // I glance and go "oh the HTML tag for this code is called polaris-chip"
   // see the very bottom of the file for where this is actually implemented
+
   static get tag() {
     return 'polaris-chip';
   }
-  // constructor establishes defaults for the class
+// constructor establishes defaults for the class
   constructor() {
     super();
     // a variable on this object called title
     this.title = 'Chip default';
     this.link = '#';
   }
-
-  // CSS styles are scoped JUST to this element. This uses a technology called
+ // CSS styles are scoped JUST to this element. This uses a technology called
   // "Shadow DOM" which is ver controversial to some, but to new people and new
   // things, it's incredible. It automatically ensures that the things in your render()
   // method below it look exactly the same always no matter where they are loaded!
+
   static get styles() {
     // "css" called here is actually a function exported from Lit at the top
     // so that it scopes the CSS nicely and also applies sanitization
@@ -56,8 +59,6 @@ export class PolarisChip extends LitElement {
         font-size: 24px;
         padding: 16px;
         margin: 8px;
-
-
       }
 
       span:hover {
@@ -66,8 +67,8 @@ export class PolarisChip extends LitElement {
       }
     `;
   }
-
-  /**
+  
+/**
    * render method is specific to LitElement based code. Anything you write here
    * you can think of as what gets printed to the screen when the tag is used.
    * In this example, <polaris-chip></polaris-chip> will actually display what you
@@ -75,7 +76,7 @@ export class PolarisChip extends LitElement {
    * @returns an HTML template which gets sanitized and rendered
    */
   render() {
-    // html much like css above applies sanitization / security and ensures
+     // html much like css above applies sanitization / security and ensures
     // there is a valid HTML template that is displayed on screen. It's important
     // to keep in mind that any broken HTML tags or JS variables here can cause
     // your element to not render so color coding and syntax checking with console
@@ -94,15 +95,15 @@ export class PolarisChip extends LitElement {
   // - When it reacts to the change and it's listed in the render() method, it rerenders
   // - this is what users would expect, but is not the way the web usually works
   // - Lit + Web component spec + properties == HTML with data variables
+
   static get properties() {
     return {
-      // this is a String. Array, Object, Number, Boolean are other valid values here
+    // this is a String. Array, Object, Number, Boolean are other valid values here
       title: { type: String },
       link: { type: String },
     };
   }
 }
-
 // All web components have a call to customElements.define(tag-name, className);
 // this code tells the browser that when you see this new HTML tag name
 // that you should run this class definition. This is the magic of standards
@@ -111,4 +112,4 @@ export class PolarisChip extends LitElement {
 // Lit operates juuuust above the standards layer and leverages other standards
 // in order to deliver optimal performance with minimal "syntactical sugar"
 // aka things specific to Lit itself
-globalThis.customElements.define(PolarisChip.tag, PolarisChip);
+customElements.define(PolarisChip.tag, PolarisChip);
