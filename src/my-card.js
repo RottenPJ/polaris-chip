@@ -1,5 +1,11 @@
 import { LitElement, html, css } from 'lit';
 
+/**
+ * Now it's your turn. Here's what we need to try and do:
+ * 1. Get you HTML from your card working in here 
+ * 2. Get your CSS rescoped as needed to work here
+ */
+
 export class MyCard extends LitElement {
 
   static get tag() {
@@ -9,14 +15,14 @@ export class MyCard extends LitElement {
   static get properties() {
     return {
       cardTitle: { type: String },
-      cardImage: { type: String },
+      cardImage: { type: String }, //Why is this type string??
       cardDescription: { type: String },
     };
   }
 
   constructor() {
     super();
-    this.cardTitle = "My card";
+    this.cardTitle = "My card";  //Defaults for the card ifi nothing specified
     this.cardImage = "https://pic.onlinewebfonts.com/thumbnails/icons_98811.svg";
     this.cardDescription = "This is the default paragraph.";
   }
@@ -34,7 +40,7 @@ export class MyCard extends LitElement {
       .card img {
         margin: 8px;
         display: block;
-        width: 100%;
+        width: 100%;                 //All these settings from my original codepen code copy and pasted
         border-radius: 8px;
       }
 
@@ -65,8 +71,8 @@ export class MyCard extends LitElement {
           <img src="${this.cardImage}" alt="Card Image" />
           <p class="p">${this.cardDescription}</p>
           <div class="btn-wrapper">
-            <a href="#">
-              <button class="btn">Details</button>
+            <a href="#">                   
+              <button class="btn">Details</button> <!-- This is really confusing -->
             </a>
           </div>
         </div>
