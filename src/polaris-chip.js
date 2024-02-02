@@ -19,13 +19,14 @@ import { LitElement, html, css } from 'lit';
 // and not a thing in React, Vue, Angular, etc
 
 export class PolarisChip extends LitElement {
+
    // this is not a requirement, but it's a convention I personally enjoy
   // because it helps when looking at multiple elements. I open this file
   // I glance and go "oh the HTML tag for this code is called polaris-chip"
   // see the very bottom of the file for where this is actually implemented
 
   static get tag() {
-    return 'polaris-chip';
+    return 'polaris-chip'; // chip is basically what thehy have at the bottom of news articles, tags and stuff
   }
 // constructor establishes defaults for the class
   constructor() {
