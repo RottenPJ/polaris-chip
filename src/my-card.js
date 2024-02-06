@@ -7,6 +7,7 @@ import { LitElement, html, css } from 'lit';
  */
 
 export class MyCard extends LitElement {
+  //Lit element means web component i think?
 
   static get tag() {
     return 'my-card';
@@ -40,7 +41,7 @@ export class MyCard extends LitElement {
       .card img {
         margin: 8px;
         display: block;
-        width: 100%;                 //All these settings from my original codepen code copy and pasted
+        width: 95%;                 //All these settings from my original codepen code copy and pasted
         border-radius: 8px;
       }
 
