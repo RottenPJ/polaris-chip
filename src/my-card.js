@@ -18,6 +18,7 @@ export class MyCard extends LitElement {
       cardTitle: { type: String },
       cardImage: { type: String }, //Why is this type string??
       cardDescription: { type: String },
+      fancy: { type: Boolean, reflect: true },
     };
   }
 
@@ -26,6 +27,7 @@ export class MyCard extends LitElement {
     this.cardTitle = "My card";  //Defaults for the card ifi nothing specified
     this.cardImage = "https://pic.onlinewebfonts.com/thumbnails/icons_98811.svg";
     this.cardDescription = "This is the default paragraph.";
+    this.fancy = false;
   }
 
   static get styles() {
@@ -33,35 +35,49 @@ export class MyCard extends LitElement {
       :host {
         display: block;
       }
-
-      .card {
-        text-align: center;
-      }
-
-      .card img {
-        margin: 8px;
-        display: block;
-        width: 95%;                 //All these settings from my original codepen code copy and pasted
-        border-radius: 8px;
-      }
-
-      .card p {
-        display: block;
-        margin-top: 15px;
-      }
-
+  
       .card-wrapper {
         text-align: center;
         border: 3px solid #ccc;
-        width: 400px;
-        height: 600px;
+        width: fit-content; /* Adjusted width to fit the content */
+        height: fit-content; /* Adjusted height to fit the content */
         margin: 16px;
+        padding: 16px; /* Added padding to prevent the bleed effect */
       }
-
+  
+      .card img {
+        margin: 8px;
+        display: block;
+        width: 95%;
+        border-radius: 8px;
+      }
+  
+      .btn-wrapper {
+        margin-top: 15px;
+      }
+  
       .btn {
         display: inline-block;
       }
+  
+      :host([fancy]) {
+        background-color: pink;
+        border: 2px solid fuchsia;
+        box-shadow: 10px 5px 5px red;
+        padding: 0; /* Removed padding from the fancy style because it was fitting weird*/
+      }
     `;
+  }
+  
+
+  openChanged(e) {
+    console.log(e.newState);
+    if (e.newState === "open") {
+      this.fancy = true;
+    }
+    else {
+      this.fancy = false;
+    }
   }
 
   render() {
@@ -70,16 +86,17 @@ export class MyCard extends LitElement {
         <div class="card">
           <h2 class="title">${this.cardTitle}</h2>
           <img src="${this.cardImage}" alt="Card Image" />
-          <p class="p">${this.cardDescription}</p>
+          <p class="p"><slot></p>${this.cardDescription}</slot></p>
           <div class="btn-wrapper">
-            <a href="#">                   
-              <button class="btn">Details</button> <!-- This is really confusing -->
+            <a href="https://www.psu.edu" target="_blank"> 
+              <button class="btn">Details</button>
             </a>
           </div>
         </div>
       </div>
     `;
   }
+  
 }
 
 customElements.define(MyCard.tag, MyCard);

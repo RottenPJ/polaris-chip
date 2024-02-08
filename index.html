@@ -22,6 +22,15 @@
     polaris-chip {
       margin: 16px;
     }
+
+    .button-wrapper {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .button-wrapper button {
+      margin: 4px;
+    }
   </style>
 </head>
 
@@ -35,18 +44,67 @@
   <polaris-chip title="Cool stuff"></polaris-chip>
 
   <h1>my-card</h1>
-  <my-card cardTitle="HAX at Penn State"
-         cardImage="https://upload.wikimedia.org/wikipedia/commons/3/3b/Penn_state_old_main_summer.jpg"
-         cardDescription="Penn State stands as a beacon of academic excellence."></my-card>
+  <div class="button-wrapper">
+    <button class="duplicate">Clone Card</button>
+    <button id="changetitle">Change Title</button>
+    <button id="changeimage">Change Image</button>
+    <button id="changebg">Change Background</button>
+    <button id="delete">Delete Card</button>
+  </div>
 
-  <my-card cardTitle="XAH at Ohio State"
-         cardImage="https://kentcollegesearch.files.wordpress.com/2012/06/img_clock-bldg07.jpg"
-         cardDescription="Ohio State stands as a beacon of dissapointment."></my-card>
+  <my-card fancy cardTitle="HAX at Penn State" cardImage="https://upload.wikimedia.org/wikipedia/commons/3/3b/Penn_state_old_main_summer.jpg"
+    cardDescription="Penn State stands as a beacon of academic excellence."></my-card>
 
-  <!-- Add more instances with different attributes as needed -->
+  <my-card cardTitle="XAH at Ohio State" cardImage="https://kentcollegesearch.files.wordpress.com/2012/06/img_clock-bldg07.jpg"
+    cardDescription="Ohio State stands as a beacon of disappointment."></my-card>
 
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
+
+
+
+
+  <!-- Code for buttons-->
+  <script>
+    document.querySelector('.duplicate').addEventListener('click', function(e) {
+      const originalCard = document.querySelector('my-card');
+      if (document.querySelectorAll('my-card').length < 10) {
+        const newCard = originalCard.cloneNode(true);
+        document.body.appendChild(newCard);
+      }
+    });
+
+    document.getElementById('changetitle').addEventListener('click', function(e) {
+      const titles = document.querySelectorAll('my-card');
+      titles.forEach(title => {
+        title.cardTitle = 'DIVDIVDIV HAHA';
+      });
+    });
+
+    document.getElementById('changeimage').addEventListener('click', function(e) {
+      const images = document.querySelectorAll('my-card');
+      images.forEach(image => {
+        image.cardImage = 'https://www.grunge.com/img/gallery/ohio-states-buckeye-mascot-explained/l-intro-1644250886.jpg';
+      });
+    });
+
+    document.getElementById('changebg').addEventListener('click', function(e) {
+      const cardWrappers = document.querySelectorAll('my-card');
+      cardWrappers.forEach(wrapper => {
+        wrapper.shadowRoot.querySelector(".card-wrapper").style.backgroundColor = 'red';
+      });
+    });
+
+    document.getElementById('delete').addEventListener('click', function(e) {
+      const cardList = document.querySelectorAll('my-card');
+      if (cardList.length > 1) {
+        const lastCard = cardList[cardList.length - 1];
+        lastCard.parentNode.removeChild(lastCard);
+      }
+    });
+  </script>
 </body>
 
 </html>
+
+
