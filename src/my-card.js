@@ -86,7 +86,13 @@ export class MyCard extends LitElement {
         <div class="card">
           <h2 class="title">${this.cardTitle}</h2>
           <img src="${this.cardImage}" alt="Card Image" />
-          <p class="p"><slot></p>${this.cardDescription}</slot></p>
+          <details ?open="${this.fancy}" @toggle="${this.openChanged}">
+             <summary>Description</summary>
+           <div>
+             <slot>${this.description}</slot>
+           </div>
+        </details>
+          <slot>${this.cardDescription}</slot>
           <div class="btn-wrapper">
             <a href="https://www.psu.edu" target="_blank"> 
               <button class="btn">Details</button>
