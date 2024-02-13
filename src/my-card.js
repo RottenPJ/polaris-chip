@@ -94,7 +94,7 @@ export class MyCard extends LitElement {
         </details>
           <slot>${this.cardDescription}</slot>
           <div class="btn-wrapper">
-            <a href="https://www.psu.edu" target="_blank"> 
+            <a href="https://www.psu.edu" target="blank"> 
               <button class="btn">Details</button>
             </a>
           </div>
