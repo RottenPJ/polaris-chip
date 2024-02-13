@@ -20,6 +20,8 @@ export class MyCard extends LitElement {
       cardImage: { type: String }, //Why is this type string??
       cardDescription: { type: String },
       fancy: { type: Boolean, reflect: true },
+      bottomText: {type: String },
+      topText: {type: String },
     };
   }
 
@@ -29,6 +31,8 @@ export class MyCard extends LitElement {
     this.cardImage = "https://pic.onlinewebfonts.com/thumbnails/icons_98811.svg";
     this.cardDescription = "This is the default paragraph.";
     this.fancy = false;
+    this.bottomText = "";
+    this.topText = "";
   }
 
   static get styles() {
@@ -87,7 +91,7 @@ export class MyCard extends LitElement {
         <div class="card">
           <h2 class="title">${this.cardTitle}</h2>
           <!-- <img src="${this.cardImage}" alt="Card Image" /> -->
-          <meme-maker alt="meme" image-url="${this.cardImage}" top-text= "ARE WE" bottom-text="PENN STATE?">
+          <meme-maker alt="meme" image-url="${this.cardImage}" top-text= "${this.topText}" bottom-text= "${this.bottomText}">
 </meme-maker>
           <details ?open="${this.fancy}" @toggle="${this.openChanged}">
              <summary>Description</summary>
