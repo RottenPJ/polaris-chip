@@ -90,7 +90,7 @@ export class MyCard extends LitElement {
       <div class="card-wrapper">
         <div class="card">
           <h2 class="title">${this.cardTitle}</h2>
-          <!-- <img src="${this.cardImage}" alt="Card Image" /> -->
+          <!-- <img src="${this.cardImage}" alt="Card Image" /> --> <!-- Commented out image to replace with meme -->
           <meme-maker alt="meme" image-url="${this.cardImage}" top-text= "${this.topText}" bottom-text= "${this.bottomText}">
 </meme-maker>
           <details ?open="${this.fancy}" @toggle="${this.openChanged}">

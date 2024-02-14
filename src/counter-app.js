@@ -9,7 +9,7 @@ export class CounterApp extends LitElement {
   static get properties() {
     return {
       counter: { type: Number },
-      min: { type: Number },
+      min: { type: Number }, //Basic properties of the counter are the counter itself, min number and max number which differ from instance to instance
       max: { type: Number }
     };
   }
@@ -17,7 +17,7 @@ export class CounterApp extends LitElement {
   constructor() {
     super();
     this.counter = 0;
-    this.min = 0;
+    this.min = 0; //Default values of all
     this.max = 100;
   }
 
@@ -31,18 +31,28 @@ export class CounterApp extends LitElement {
 
       .counter-wrapper {
         margin: 20px;
-        border: 3px solid black;
+        border: 3px solid black; //border around each counter
         padding: 16px;
-        width: 100px;
+        width: 200px;
+        height: 200px;
+        background-color: gray;
       }
 
+      .counter:hover {
+        transform: scaleY(-1); //Found this by looking "fun hover effects" on chatgpt. Flips counter inverted when hovered over. Scale y means vertically, scale x is horizontally
+      }
+      
+
       .counter {
-        font-size: 48px;
-        color: black; /* Default color without hitting any of specified numbers*/
+        font-size: 75px;
+        color: black; 
+        padding: 16px;
+        margin-top: 24px;
       }
 
       .button-wrapper {
-        margin-top: 10px;
+        margin-top: 8px;
+        padding 8px;
       }
 
       .button {
@@ -59,7 +69,7 @@ export class CounterApp extends LitElement {
 
       .button:disabled {
         background-color: red;
-        cursor: not-allowed;
+        cursor: not-allowed; //makes cursor have an x not allowed type symbol when it is disabled aka at max or min 
       }
     `;
   }
@@ -67,20 +77,25 @@ export class CounterApp extends LitElement {
   render() {
     return html`
     
-      <div class="counter-wrapper">
+    
+      <div class="counter-wrapper"> <!-- confetti wrapper is limited to being inside each counter -->
+      <confetti-container id="confetti">
         <div class="counter">${this.counter}</div>
         <div class="button-wrapper">
           <button class="button" @click="${this.increment}" ?disabled="${this.counter === this.max}">+</button>
-          <button class="button" @click="${this.decrement}" ?disabled="${this.counter === this.min}">-</button>
+          <button class="button" @click="${this.decrement}" ?disabled="${this.counter === this.min}">-</button> <!-- If counter at max or min, disable button -->
         </div>
+        </confetti-container>
         </div>
       </div>
+
+      
     `;
   }
 
   updated(changedProperties) {
     if (changedProperties.has('counter')) {
-      // Check if the counter value triggers the confetti animation
+      // Check if the counter value triggers the confetti animation                  //This section copy and pasted
       if (this.counter === 21) {
         this.makeItRain();
       }
@@ -94,7 +109,7 @@ export class CounterApp extends LitElement {
     import("@lrnwebcomponents/multiple-choice/lib/confetti-container.js").then(
       (module) => {
         // This is a minor timing 'hack'. We know the code library above will import prior to this running
-        // The "set timeout 0" means "wait 1 microtask and run it on the next cycle.
+        // The "set timeout 0" means "wait 1 microtask and run it on the next cycle.                                   //This section copy and pasted
         // this "hack" ensures the element has had time to process in the DOM so that when we set popped
         // it's listening for changes so it can react
         setTimeout(() => {
@@ -113,7 +128,7 @@ export class CounterApp extends LitElement {
   increment() {
     if (this.counter < this.max) {
       this.counter++;
-      if (this.counter === 18 || this.counter === 21 || this.counter === this.min || this.counter === this.max) {
+      if (this.counter === 18 || this.counter === 21 || this.counter === this.min || this.counter === this.max) {   //If counter less than max, allow increment otherwize do not and change run change color method.
         this.changeColor();
       }
     }
@@ -122,7 +137,7 @@ export class CounterApp extends LitElement {
   decrement() {
     if (this.counter > this.min) {
       this.counter--;
-      if (this.counter === 18 || this.counter === 21 || this.counter === this.min || this.counter === this.max) {
+      if (this.counter === 18 || this.counter === 21 || this.counter === this.min || this.counter === this.max) { //Same for here but min
         this.changeColor();
       }
     }
@@ -132,12 +147,12 @@ export class CounterApp extends LitElement {
     const counterElement = this.shadowRoot.querySelector('.counter');
     if (this.counter === 18) 
     {
-      counterElement.style.color = 'green';
+      counterElement.style.color = 'green'; //Changes color to green once hits 18
     } 
     else if (this.counter === 21) {
-      counterElement.style.color = 'pink';
+      counterElement.style.color = 'pink'; //Changes color to pink once it hits 21
     }
-    else if (this.counter === this.min || this.counter === this.max)
+    else if (this.counter === this.min || this.counter === this.max) //if counter at max or min, color red
     {
       counterElement.style.color = 'red';
     }
