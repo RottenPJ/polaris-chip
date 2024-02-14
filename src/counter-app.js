@@ -79,13 +79,13 @@ export class CounterApp extends LitElement {
     
     
       <div class="counter-wrapper"> <!-- confetti wrapper is limited to being inside each counter -->
-      <confetti-container id="confetti">
+       <confetti-container id="confetti">
         <div class="counter">${this.counter}</div>
-        <div class="button-wrapper">
+         <div class="button-wrapper">
           <button class="button" @click="${this.increment}" ?disabled="${this.counter === this.max}">+</button>
-          <button class="button" @click="${this.decrement}" ?disabled="${this.counter === this.min}">-</button> <!-- If counter at max or min, disable button -->
+          <button class="button" @click="${this.decrement}" ?disabled="${this.counter === this.min}">-</button> <!-- If counter at max or min, disable button that could make it go above or below -->
         </div>
-        </confetti-container>
+       </confetti-container>
         </div>
       </div>
 
