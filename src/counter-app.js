@@ -52,7 +52,7 @@ export class CounterApp extends LitElement {
 
       .button-wrapper {
         margin-top: 8px;
-        padding 8px;
+        padding: 8px;
       }
 
       .button {
