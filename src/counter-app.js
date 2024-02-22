@@ -118,7 +118,7 @@ export class CounterApp extends LitElement {
           // after the animation runs so it's a simple way to generate the effect over and over again
           this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
         }, 0);
-      }
+      } 
     );
   }
   
