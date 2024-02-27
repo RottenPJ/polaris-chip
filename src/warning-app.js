@@ -15,7 +15,7 @@ export class WarningApp extends LitElement {
   constructor() {
     super();
     this.open = true; 
-    this.status = 'notice'; //Having issues here with this.open and local storage...
+    this.status = 'notice'; //Having issues here with this.open and local storage acts weird. Something to do with cookies??
     this.date = ''; 
     this.sticky = false; 
     this.description = 'This is the default description.'
@@ -26,6 +26,8 @@ export class WarningApp extends LitElement {
     }
   }
 
+  //Below it sets basic colors for host, then custom depending on what kind of warning this is (specified in index)
+
   static get styles() {
     return css`
       :host {
@@ -35,28 +37,29 @@ export class WarningApp extends LitElement {
         background-color: white;
         border: 2px solid black;
       }
+
       .notice {
-        background-color: lightblue;
+        background-color: lightblue; 
         padding: 16px;
       }
       .warning {
-        background-color: orange;
-        padding: 16px;
+        background-color: orange;     
+        padding: 16px;  
       }
       .alert {
         background-color: red;
         padding: 16px;
       }
+      .custom { 
+        padding: 16px;
+        color: purple;
+        background-color: violet;    //Here is where you apply custom colors to your warning app instance
+      }
       .wrapper {
         position: relative;
       }
       .wrapper img {
-        width: 40px;
-      }
-      :host(#custom-warning) {
-      background-color: purple;
-      color: yellowgreen;
-
+        width: 40px; //Admjust size of exclamation photo
       }
     `;
   }
@@ -64,19 +67,10 @@ export class WarningApp extends LitElement {
   updated(changedProperties) {
     if (changedProperties.has('open')) {
       if (this.open) {
-        localStorage.removeItem('warningAppStatus');
+        localStorage.removeItem('warningAppStatus');  //This is from chatGPT.
       } else {
         localStorage.setItem('warningAppStatus', 'closed');
       }
-    }
-  }
-
-  toggleAlert() {
-    this.open = !this.open;  //Makes the focus work as requested in draft outline
-    if (this.open) {
-      this.shadowRoot.querySelector('.close-button').focus();
-    } else {
-      this.shadowRoot.querySelector('.open-button').focus();
     }
   }
 
@@ -90,7 +84,8 @@ export class WarningApp extends LitElement {
 
          ${this.open ? html`
           <details>${this.description}</details>
-          <p>${this.date}</p>
+          <h3>${this.date}</h3>
+          
 
         ` : html`
         `}
