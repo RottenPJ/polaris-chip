@@ -13,8 +13,8 @@ export class WarningApp extends LitElement {
 
   constructor() {
     super();
-    this.open = false; 
-    this.status = 'notice'; 
+    this.open = true; 
+    this.status = 'notice'; //Having issues here with this.open and local storage...
     this.date = ''; 
     this.sticky = false; 
     this.exclamationImage = 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngmart.com%2Ffiles%2F8%2FExclamation-Mark-PNG-Photos.png&f=1&nofb=1&ipt=c40732e50c7b7cfa01654b714374b1efb43417645bf8ee42b763ee82c0bd27d9&ipo=images';
@@ -55,6 +55,7 @@ export class WarningApp extends LitElement {
       {
         width: 40px;
       }
+      
     `;
   }
 
