@@ -7,8 +7,8 @@ export class WarningApp extends LitElement {
       status: { type: String },
       date: { type: String },
       sticky: { type: Boolean },
-      exclamationImage: {type: String},
-      description: {type: String},
+      exclamationImage: {type: String, attribute: "exclamation-image"},
+      description: { type: String },
     };
   }
 
@@ -41,25 +41,37 @@ export class WarningApp extends LitElement {
       .notice {
         background-color: lightblue; 
         padding: 16px;
+        
       }
       .warning {
         background-color: orange;     
         padding: 16px;  
+        
       }
       .alert {
         background-color: red;
         padding: 16px;
+        
       }
       .custom { 
         padding: 16px;
         color: purple;
-        background-color: violet;    //Here is where you apply custom colors to your warning app instance
+        background-color: violet;  
+          //Here is where you apply custom colors to your warning app instance
       }
       .wrapper {
-        position: relative;
+        display: block;
       }
       .wrapper img {
         width: 40px; //Admjust size of exclamation photo
+      }
+
+      :host([sticky]) .wrapper  {
+
+        position: sticky;
+        top: 0;
+        z-index: 100;
+
       }
     `;
   }
@@ -84,12 +96,13 @@ export class WarningApp extends LitElement {
 <!-- Transforms the status into all uppercase for the title which says alert, warning, notice -->
          ${this.open ? html`
           <details>${this.description}</details>
+          <slot></slot>
           <h3>${this.date}</h3>
-          
-
         ` : html`
+        
         `}
       </div>
+
     `;
   }
 }
