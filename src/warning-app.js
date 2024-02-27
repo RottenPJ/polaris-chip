@@ -92,7 +92,6 @@ export class WarningApp extends LitElement {
           <p>${this.date}</p>
           
         ` : html`
-          <button @click="${this.toggleAlert}" class="open-button">Open</button>
         `}
       </div>
     `;
