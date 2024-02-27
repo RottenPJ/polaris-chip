@@ -13,15 +13,14 @@ export class WarningApp extends LitElement {
 
   constructor() {
     super();
-    this.open = true; // default is open
-    this.status = 'notice'; // default status
-    this.date = ''; // default date
-    this.sticky = false; // default sticky behavior
+    this.open = false; 
+    this.status = 'notice'; 
+    this.date = ''; 
+    this.sticky = false; 
     this.exclamationImage = 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngmart.com%2Ffiles%2F8%2FExclamation-Mark-PNG-Photos.png&f=1&nofb=1&ipt=c40732e50c7b7cfa01654b714374b1efb43417645bf8ee42b763ee82c0bd27d9&ipo=images';
-    // Check localStorage for the status and update if it's closed
     const localStorageStatus = localStorage.getItem('warningAppStatus');
     if (localStorageStatus === 'closed') {
-      this.open = false;
+      this.open = true;
     }
   }
 
@@ -87,10 +86,10 @@ export class WarningApp extends LitElement {
 
          <div style="text-transform:uppercase;"> <h3>${this.status}</h3></div>
 
-        ${this.open ? html`
+         ${this.open ? html`
           <details>${this.textContent}</details>
           <p>${this.date}</p>
-          
+
         ` : html`
         `}
       </div>
