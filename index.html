@@ -31,6 +31,8 @@
     .button-wrapper button {
       margin: 4px;
     }
+
+    
   </style>
 
 
@@ -40,23 +42,27 @@
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
   <script type="module" src="./src/warning-app.js"></script>
+  <script type="module" src="./src/counter-app.js"></script>
 
-  <warning-app status="notice" date="2024-02-26" sticky>
-    <p>Notice: Pollock dining hall is out of french toast sticks!</p>
+  <!--INSTANCES OF WARNING APP BELOW-->
+
+  <warning-app status="notice" date="2024-02-26" description="Pollock dining hall is out of french toast sticks.">
   </warning-app>
 
   
-  <warning-app status="warning" date="2024-02-27">
-    <p>Warning: Squirrel is loose inside pollock dining hall. Please avoid area.</p>
+  <warning-app status="warning" date="2024-02-27" description="Squirrel is loose inside pollock dining hall. Please avoid area.">
   </warning-app>
 
   
-  <warning-app status="alert" date="2024-02-28">
-    <p>Alert: POLLOCK DINING HALL IS BURNING DOWN! </p>
+  <warning-app status="alert" date="2024-02-28" description="POLLOCK DINING HALL IS BURNING DOWN!">
   </warning-app>
 
 
+  <warning-app id="custom-warning" status="alert" date="2024-02-29" description="The colors should be adjusted here.">
+  </warning-app>
 
+
+<!--INSTANCES OF POLARIS CHIP BELOW-->
 
   <h1>polaris-chip</h1>
   <polaris-chip title="News of record" link="https://psu.edu"></polaris-chip>
@@ -65,6 +71,8 @@
   <polaris-chip title="Financial Aid"></polaris-chip>
   <polaris-chip title="About"></polaris-chip>
   <polaris-chip title="Cool stuff"></polaris-chip>
+
+  <!--INSTANCES OF MY CARD BELOW-->
 
   <h1>my-card</h1>
   <div class="button-wrapper">
@@ -86,14 +94,10 @@
   
   </my-card>
 
-  <script type="module" src="./src/polaris-chip.js"></script>
-  <script type="module" src="./src/my-card.js"></script>
-  <script type="module" src="./src/warning-app.js"></script>
 
 
-  
 
-  <!-- Code for buttons-->
+  <!--CODE FOR BUTTONS-->
   <script>
     document.querySelector('.duplicate').addEventListener('click', function(e) {
       const originalCard = document.querySelector('my-card');
@@ -133,6 +137,8 @@
     });
   </script>
 
+  <!--COUNTER APP STUFF BELOW-->
+
   <h1> <strong>EPIC</strong> counter-app</h1>
 
   <h2> <strong>Specifications:</strong></h2>
@@ -150,16 +156,6 @@
 
   <confetti-container id="confetti"><counter-app counter="16" min="10" max="25"></counter-app></confetti-container>
   <counter-app></counter-app> <!-- This one is set to default just to show it works has min of 0 AND max of 100-->
-
-
-
-  <script type="module" src="./src/counter-app.js"></script> <!-- import script for counter app from counter-app-js -->
-
-
-
-
-
-
 
   
 </body>

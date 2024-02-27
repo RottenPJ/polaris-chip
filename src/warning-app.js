@@ -8,6 +8,7 @@ export class WarningApp extends LitElement {
       date: { type: String },
       sticky: { type: Boolean },
       exclamationImage: {type: String},
+      description: {type: String},
     };
   }
 
@@ -17,6 +18,7 @@ export class WarningApp extends LitElement {
     this.status = 'notice'; //Having issues here with this.open and local storage...
     this.date = ''; 
     this.sticky = false; 
+    this.description = 'This is the default description.'
     this.exclamationImage = 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngmart.com%2Ffiles%2F8%2FExclamation-Mark-PNG-Photos.png&f=1&nofb=1&ipt=c40732e50c7b7cfa01654b714374b1efb43417645bf8ee42b763ee82c0bd27d9&ipo=images';
     const localStorageStatus = localStorage.getItem('warningAppStatus');
     if (localStorageStatus === 'closed') {
@@ -32,7 +34,6 @@ export class WarningApp extends LitElement {
         color: black;
         background-color: white;
         border: 2px solid black;
-        border-color: black;
       }
       .notice {
         background-color: lightblue;
@@ -46,16 +47,17 @@ export class WarningApp extends LitElement {
         background-color: red;
         padding: 16px;
       }
-      .sticky {
-        position: sticky;
-        top: 0;
+      .wrapper {
+        position: relative;
       }
-
-      .wrapper img 
-      {
+      .wrapper img {
         width: 40px;
       }
-      
+      :host(#custom-warning) {
+      background-color: purple;
+      color: yellowgreen;
+
+      }
     `;
   }
 
@@ -70,8 +72,7 @@ export class WarningApp extends LitElement {
   }
 
   toggleAlert() {
-    this.open = !this.open;
-    // Ensure opposite button is focused
+    this.open = !this.open;  //Makes the focus work as requested in draft outline
     if (this.open) {
       this.shadowRoot.querySelector('.close-button').focus();
     } else {
@@ -81,14 +82,14 @@ export class WarningApp extends LitElement {
 
   render() {
     return html`
-      <div class="wrapper ${this.status} ${this.sticky ? 'sticky' : ''}">
+      <div class="wrapper ${this.status}">
 
       <img src="${this.exclamationImage}" alt="Card Image" />
 
          <div style="text-transform:uppercase;"> <h3>${this.status}</h3></div>
 
          ${this.open ? html`
-          <details>${this.textContent}</details>
+          <details>${this.description}</details>
           <p>${this.date}</p>
 
         ` : html`
