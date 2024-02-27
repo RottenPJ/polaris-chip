@@ -67,7 +67,7 @@ export class WarningApp extends LitElement {
   updated(changedProperties) {
     if (changedProperties.has('open')) {
       if (this.open) {
-        localStorage.removeItem('warningAppStatus');  //This is from chatGPT.
+        localStorage.removeItem('warningAppStatus');  //This is from chatGPT, controls the local storage status of open/closed
       } else {
         localStorage.setItem('warningAppStatus', 'closed');
       }
@@ -81,7 +81,7 @@ export class WarningApp extends LitElement {
       <img src="${this.exclamationImage}" alt="Card Image" />
 
          <div style="text-transform:uppercase;"> <h3>${this.status}</h3></div>
-
+<!-- Transforms the status into all uppercase for the title which says alert, warning, notice -->
          ${this.open ? html`
           <details>${this.description}</details>
           <h3>${this.date}</h3>
