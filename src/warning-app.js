@@ -6,7 +6,7 @@ export class WarningApp extends LitElement {
       open: { type: Boolean },
       status: { type: String },
       date: { type: String },
-      sticky: { type: Boolean },
+      sticky: { type: Boolean, reflect:true },
       exclamationImage: {type: String, attribute: "exclamation-image"},
       description: { type: String },
     };
@@ -17,7 +17,7 @@ export class WarningApp extends LitElement {
     this.open = true; 
     this.status = 'notice'; //Having issues here with this.open and local storage acts weird. Something to do with cookies??
     this.date = ''; 
-    this.sticky = false; 
+    this.sticky = false ; 
     this.description = 'This is the default description.'
     this.exclamationImage = 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngmart.com%2Ffiles%2F8%2FExclamation-Mark-PNG-Photos.png&f=1&nofb=1&ipt=c40732e50c7b7cfa01654b714374b1efb43417645bf8ee42b763ee82c0bd27d9&ipo=images';
     const localStorageStatus = localStorage.getItem('warningAppStatus');
@@ -66,7 +66,7 @@ export class WarningApp extends LitElement {
         width: 40px; //Admjust size of exclamation photo
       }
 
-      :host([sticky]) .wrapper  {
+      :host([sticky])  {
 
         position: sticky;
         top: 0;
