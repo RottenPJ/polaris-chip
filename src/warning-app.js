@@ -22,7 +22,7 @@ export class WarningApp extends LitElement {
     this.exclamationImage = 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngmart.com%2Ffiles%2F8%2FExclamation-Mark-PNG-Photos.png&f=1&nofb=1&ipt=c40732e50c7b7cfa01654b714374b1efb43417645bf8ee42b763ee82c0bd27d9&ipo=images';
     const localStorageStatus = localStorage.getItem('warningAppStatus');
     if (localStorageStatus === 'closed') {
-      this.open = true;
+      this.open = false;
     }
   }
 
