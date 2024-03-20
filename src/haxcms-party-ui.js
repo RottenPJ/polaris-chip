@@ -33,7 +33,7 @@ export class PartyUI extends DDD {
     return html`
     <div>
         <h1>This is a placeholder!</h1>
-        <rpg-character></rpg-character>
+        <rpg-character>seed="example"</rpg-character>  <!-- Seed is where you pass in the name to create a unqiue character from its hash value -->
     </div>
       
     `;
