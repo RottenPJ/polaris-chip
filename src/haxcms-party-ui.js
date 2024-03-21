@@ -1,9 +1,8 @@
 import { html, css } from "lit";
 import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
-import "@lrnwebcomponents/rpg-character/rpg-character.js";
+import "@lrnwebcomponents/rpg-character/rpg-character.js"; //Import of custom character functionality.
 
 export class PartyUI extends DDD {
-  
 
   static get tag() {
     return 'party-ui';
@@ -15,7 +14,6 @@ export class PartyUI extends DDD {
       title: { type: String },
       projectName: { type: String},
       usernames: { type: Array }
-     
     };
   }
 
@@ -23,16 +21,18 @@ export class PartyUI extends DDD {
     super();
     this.title = "Default Title";
     this.projectName = "Default Project"
-    this.usernames = [];
+    this.usernames = []; //Initialize usernmes array list to nothing initially.
   }
 
   static get styles() {
     return [
       super.styles,
       css`
+
       :host {
         display: block;
       }
+
       .party-wrapper {
         padding: var(-ddd-spacing-5);
         margin: var(--ddd-spacing-2) var(--ddd-spacing-0); 
@@ -45,8 +45,6 @@ export class PartyUI extends DDD {
         color: var(--ddd-theme-default-pughBlue);
         background: var(--ddd-theme-default-beaver80);
       }
-
-      
 
       .user-container {
         display: flex;
@@ -67,7 +65,7 @@ export class PartyUI extends DDD {
 
       .user-container :hover
       {
-        background-color: var(--ddd-theme-default-skyLight);
+        background-color: var(--ddd-theme-default-skyLight); //Hover state for user containers.
       }
 
 
@@ -79,7 +77,7 @@ export class PartyUI extends DDD {
       }
 
       details {
-        border: none;
+        border: none; //Added this to get rid of a weird line below details. No other purpose other than that.
         outline: none;
       }
 
@@ -94,7 +92,7 @@ export class PartyUI extends DDD {
 
       .title-with-icon {
         display: flex;
-        align-items: center;
+        align-items: center; //Title and project icon "checklist looking thing" are grouped together.
       }
 
       .title-with-icon h1 {
@@ -121,7 +119,7 @@ export class PartyUI extends DDD {
     return html`
     
     <div class="party-wrapper">
-      <confetti-container id="confetti">
+      <confetti-container id="confetti"> 
 
         <div class="title-with-icon">
           <h1> ${this.projectName}</h1>  
@@ -134,14 +132,14 @@ export class PartyUI extends DDD {
           <label for="userInput">Add User:</label>
           <input type="text" id="userInput">
           
-          <button @click="${this.addUsername}" >Submit</button>
+          <button @click="${this.addUsername}" >Submit</button> <!-- Sorry, divs get a little confusing here lol -->
           <div class="user-container">
 
           ${this.usernames.map((username,index) => html`
              <div>
 
-             <button @click="${() => this.deleteUser(index)}">X</button>
-                <rpg-character seed="${username}"></rpg-character>
+             <button @click="${() => this.deleteUser(index)}">X</button> <!-- When x button clicked, send index to deleteUser method where it will be handled. -->
+                <rpg-character seed="${username}"></rpg-character>  <!-- Adds user inputted username as the seed in each character -->
                 <span>${username}</span>
              </div>
 
@@ -149,7 +147,7 @@ export class PartyUI extends DDD {
         `)}
            </div>
 
-             <button @click="${this.makeItRain}" >Save Changes</button>
+             <button @click="${this.changesSaved}" >Save Changes</button>  <!-- Clicking changes saved calls another seperate mathod called changesSaved.-->
         
 
         </details>
@@ -164,7 +162,7 @@ export class PartyUI extends DDD {
   }
 
   addUsername() {
-    const inputField = this.shadowRoot.getElementById('userInput');
+    const inputField = this.shadowRoot.getElementById('userInput');   //Gets user input, trims. Trim removes white space from either side of text.
     const username = inputField.value.trim();
 
     const validUsernameRegex = /^[a-z0-9]+$/;
@@ -175,8 +173,20 @@ export class PartyUI extends DDD {
     }
     else
     {
-      alert("Only lowercase letters and numbers please!")
+      alert("Only lowercase letters and numbers please!") //If regex fails, alert user
     }
+  }
+
+  changesSaved() {
+      if (this.usernames.length > 0) {
+        const userList = this.usernames.join(', '); //If username has at least one list in it, join all usernames seperated by commas. Else, say "No usernames to display."
+        alert(`Changes saved successfully!\nUsernames: ${userList}`);
+    } else {
+        alert("No usernames to display!"); 
+    }
+
+    this.makeItRain();  //Calls make it rain at end to create desired confetti effect.
+    
   }
 
   makeItRain() {
@@ -185,14 +195,14 @@ export class PartyUI extends DDD {
       (module) => {
         
         setTimeout(() => {
-          this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+          this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");  //Make it rain code, given to us by Prof 
         }, 0);
       } 
     );
   }
 
   deleteUser(index) {
-    this.usernames.splice(index, 1);
+    this.usernames.splice(index, 1);  //Delete user method, where it is passed respective index from X button.
     this.requestUpdate();
   }
   
