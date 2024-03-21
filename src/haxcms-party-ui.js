@@ -13,9 +13,8 @@ export class PartyUI extends DDD {
     return {
       ...super.properties,
       title: { type: String },
-      projectName: { type: String}
-
-
+      projectName: { type: String},
+      usernames: { type: Array }
      
     };
   }
@@ -24,7 +23,7 @@ export class PartyUI extends DDD {
     super();
     this.title = "Default Title";
     this.projectName = "Default Project"
-    
+    this.usernames = [];
   }
 
   static get styles() {
@@ -39,12 +38,37 @@ export class PartyUI extends DDD {
         margin: var(--ddd-spacing-2) var(--ddd-spacing-0); 
         color: var(--ddd-theme-default-beaverBlue);
         border: 3px solid black;
-        background-color: cadetblue;
+        background-color: var(--ddd-theme-default-pughBlue);
       }
+
+      .user-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; 
+        justify-content: center; 
+        transition: background-color 0.4s ease-in-out;
+      }
+
+      .user-container div 
+      {
+        text-align: center; 
+        background-color: var(--ddd-theme-default-beaver70);
+        border-radius: 10px;
+        padding: 10px;
+        
+      }
+
+      .user-container :hover
+      {
+        background-color: var(--ddd-theme-default-skyLight);
+      }
+
 
       rpg-character {
         width: 150px;
         height: 250px;
+        display: block;
+        margin: 0 auto;
       }
 
       details {
@@ -70,6 +94,19 @@ export class PartyUI extends DDD {
         margin-right: 20px;
       }
 
+      label {
+        color: var(--ddd-theme-default-beaverBlue);
+
+      }
+
+      span {
+        color: var(--ddd-theme-default-nittanyNavy);
+        display: block;
+        margin-top: 10px;
+        
+
+      }
+
     `];
   }
   
@@ -87,15 +124,37 @@ export class PartyUI extends DDD {
 
         <details>
           <h2> Team Options: </h2>
+
+          <label for="userInput">Add User:</label>
+          <input type="text" id="userInput">
+          <button @click="${this.addUsername}">Submit</button>
+          <div class="user-container">
+
+          ${this.usernames.map(username => html`
+             <div>
+                <rpg-character seed="${username}"></rpg-character>
+                <span>${username}</span>
+             </div>
+        `)}
+         </div>
         
-          
-          <rpg-character>seed="example"</rpg-character>  <!-- Seed is where you pass in the name to create a unqiue character from its hash value -->
 
         </details>
 
     </div>
+
+    
       
     `;
+  }
+
+  addUsername() {
+    const inputField = this.shadowRoot.getElementById('userInput');
+    const username = inputField.value.trim();
+    if (username) {
+      this.usernames = [...this.usernames, username]; // Add username to the array
+      inputField.value = ''; // Clear input field to recieve new value!
+    }
   }
   
 }
