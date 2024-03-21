@@ -41,6 +41,13 @@ export class PartyUI extends DDD {
         background-color: var(--ddd-theme-default-pughBlue);
       }
 
+      .within-details button {
+        color: var(--ddd-theme-default-pughBlue);
+        background: var(--ddd-theme-default-beaver80);
+      }
+
+      
+
       .user-container {
         display: flex;
         flex-wrap: wrap;
@@ -103,8 +110,6 @@ export class PartyUI extends DDD {
         color: var(--ddd-theme-default-nittanyNavy);
         display: block;
         margin-top: 10px;
-        
-
       }
 
     `];
@@ -114,34 +119,44 @@ export class PartyUI extends DDD {
 
   render() {
     return html`
+    
     <div class="party-wrapper">
+      <confetti-container id="confetti">
 
-      <div class="title-with-icon">
+        <div class="title-with-icon">
+          <h1> ${this.projectName}</h1>  
+          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.clipartkey.com%2Fmpngs%2Fb%2F183-1832959_project-management-clipart.png&f=1&nofb=1&ipt=01246a5ecab7d56bd69a10da0734472904f10bc0266fb9a74c11f4f33740f1f6&ipo=images" alt="Project Image" />
+        </div>
 
-        <h1> ${this.projectName}</h1>  
-        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.clipartkey.com%2Fmpngs%2Fb%2F183-1832959_project-management-clipart.png&f=1&nofb=1&ipt=01246a5ecab7d56bd69a10da0734472904f10bc0266fb9a74c11f4f33740f1f6&ipo=images" alt="Project Image" />
-      </div>
-
-        <details>
+        <details class="within-details">
           <h2> Team Options: </h2>
 
           <label for="userInput">Add User:</label>
           <input type="text" id="userInput">
-          <button @click="${this.addUsername}">Submit</button>
+          
+          <button @click="${this.addUsername}" >Submit</button>
           <div class="user-container">
 
-          ${this.usernames.map(username => html`
+          ${this.usernames.map((username,index) => html`
              <div>
+
+             <button @click="${() => this.deleteUser(index)}">X</button>
                 <rpg-character seed="${username}"></rpg-character>
                 <span>${username}</span>
              </div>
+
+             
         `)}
-         </div>
+           </div>
+
+             <button @click="${this.makeItRain}" >Save Changes</button>
         
 
         </details>
+      </div>
 
-    </div>
+     </confetti-container>
+  
 
     
       
@@ -151,10 +166,34 @@ export class PartyUI extends DDD {
   addUsername() {
     const inputField = this.shadowRoot.getElementById('userInput');
     const username = inputField.value.trim();
-    if (username) {
-      this.usernames = [...this.usernames, username]; // Add username to the array
-      inputField.value = ''; // Clear input field to recieve new value!
+
+    const validUsernameRegex = /^[a-z0-9]+$/;
+    if (username && validUsernameRegex.test(username)) {
+      this.usernames = [...this.usernames, username];      //This regex input validation was taken from chatGPT.
+      inputField.value = ''; 
+      this.makeItRain();
     }
+    else
+    {
+      alert("Only lowercase letters and numbers please!")
+    }
+  }
+
+  makeItRain() {
+    
+    import("@lrnwebcomponents/multiple-choice/lib/confetti-container.js").then(
+      (module) => {
+        
+        setTimeout(() => {
+          this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+        }, 0);
+      } 
+    );
+  }
+
+  deleteUser(index) {
+    this.usernames.splice(index, 1);
+    this.requestUpdate();
   }
   
 }
