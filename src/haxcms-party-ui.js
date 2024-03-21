@@ -182,7 +182,7 @@ export class PartyUI extends DDD {
         const userList = this.usernames.join(', '); //If username has at least one list in it, join all usernames seperated by commas. Else, say "No usernames to display."
         alert(`Changes saved successfully!\nUsernames: ${userList}`);
     } else {
-        alert("No usernames to display!"); 
+        alert("Changes saved, but no usernames to display. How lonely!"); 
     }
 
     this.makeItRain();  //Calls make it rain at end to create desired confetti effect.
