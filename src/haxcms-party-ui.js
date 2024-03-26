@@ -49,7 +49,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
       .user-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px; 
+        gap: var(--ddd-spacing-4); 
         justify-content: center; 
         transition: background-color 0.4s ease-in-out;
       }
@@ -58,8 +58,8 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
       {
         text-align: center; 
         background-color: var(--ddd-theme-default-beaver70);
-        border-radius: 10px;
-        padding: 10px;
+        border-radius: var(--ddd-spacing-4);
+        padding: var(--ddd-spacing-4);
         
       }
 
@@ -73,7 +73,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
         width: 150px;
         height: 250px;
         display: block;
-        margin: 0 auto;
+        margin: 0 auto; //Set to auto so it fits various screen sizes.
       }
 
       details {
@@ -96,7 +96,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
       }
 
       .title-with-icon h1 {
-        margin-right: 20px;
+        margin-right: var(--ddd-spacing-4);
       }
 
       label {
@@ -107,7 +107,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
       span {
         color: var(--ddd-theme-default-nittanyNavy);
         display: block;
-        margin-top: 10px;
+        margin-top: var(--ddd-spacing-4);
       }
 
     `];
