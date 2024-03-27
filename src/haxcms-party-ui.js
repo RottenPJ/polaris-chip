@@ -132,7 +132,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
           <label for="userInput">Add User:</label>
           <input type="text" id="userInput">
           
-          <button @click="${this.addUsername}" >Submit</button> <!-- Sorry, divs get a little confusing here lol -->
+          <button @click="${this.addUsername}" >Submit</button> 
           <div class="user-container">
 
           ${this.usernames.map((username,index) => html`
