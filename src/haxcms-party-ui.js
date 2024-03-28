@@ -165,7 +165,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
     const inputField = this.shadowRoot.getElementById('userInput');   //Gets user input, trims. Trim removes white space from either side of text.
     const username = inputField.value.trim();
 
-    const validUsernameRegex = /^[a-z0-9]+$/;
+    const validUsernameRegex = /^[a-z0-9]{1,10}$/;
     if (username && validUsernameRegex.test(username)) {
       this.usernames = [...this.usernames, username];      //This regex input validation was taken from chatGPT.
       inputField.value = ''; 
@@ -173,7 +173,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
     }
     else
     {
-      alert("Only lowercase letters and numbers please!") //If regex fails, alert user
+      alert("Only lowercase letters and numbers please! Username must also be under 10 characters.") //If regex fails, alert user
     }
   }
 
