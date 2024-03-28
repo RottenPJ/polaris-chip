@@ -34,16 +34,23 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
       }
 
       .party-wrapper {
-        padding: var(-ddd-spacing-5);
         margin: var(--ddd-spacing-2) var(--ddd-spacing-0); 
         color: var(--ddd-theme-default-beaverBlue);
         border: 3px solid black;
         background-color: var(--ddd-theme-default-pughBlue);
       }
 
+      button
+      {
+        padding: var(--ddd-spacing-1);
+        margin-bottom: var(--ddd-spacing-4);
+        margin-top: var(--ddd-spacing-4);
+      }
+
       .within-details button {
         color: var(--ddd-theme-default-pughBlue);
         background: var(--ddd-theme-default-beaver80);
+        
       }
 
       .user-container {
@@ -58,7 +65,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
       {
         text-align: center; 
         background-color: var(--ddd-theme-default-beaver70);
-        border-radius: var(--ddd-spacing-4);
+        border-radius: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
         
       }
@@ -71,7 +78,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
 
       rpg-character {
         width: 150px;
-        height: 250px;
+        height: 200px;
         display: block;
         margin: 0 auto; //Set to auto so it fits various screen sizes.
       }
@@ -83,7 +90,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
 
       img {
         width: 50px;
-        display: flex;
+        display: flex; //This is for the project icon (looks like a checklist)
       }
       
       h2 {
@@ -119,7 +126,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
     return html`
     
     <div class="party-wrapper">
-      <confetti-container id="confetti"> 
+      <confetti-container id="confetti"> <!-- Confetti container placed around everything for desired confetti effect -->
 
         <div class="title-with-icon">
           <h1> ${this.projectName}</h1>  
@@ -130,7 +137,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
           <h2> Team Options: </h2>
 
           <label for="userInput">Add User:</label>
-          <input type="text" id="userInput">
+          <input type="text" id="userInput" @keydown="${this.handleEnterKey}"> <!-- This makes the enter key also work instead of just clicking -->
           
           <button @click="${this.addUsername}" >Submit</button> 
           <div class="user-container">
@@ -161,6 +168,14 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
     `;
   }
 
+  handleEnterKey(event) {
+    if (event.key === 'Enter') {
+        this.addUsername(); // Call the same function that click invopkes when enter is pressed.
+    }
+}
+
+  
+
   addUsername() {
     const inputField = this.shadowRoot.getElementById('userInput');   //Gets user input, trims. Trim removes white space from either side of text.
     const username = inputField.value.trim();
@@ -173,7 +188,7 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
     }
     else
     {
-      alert("Only lowercase letters and numbers please! Username must also be under 10 characters.") //If regex fails, alert user
+      alert("Only lowercase letters and numbers please! Username must also be at or under 10 characters.") //If regex fails, alert user
     }
   }
 
