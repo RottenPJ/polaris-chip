@@ -212,13 +212,19 @@ export class PartyUI extends DDD { //PERSON GRADING THIS: PLEASE LET ME KNOW OF 
         setTimeout(() => {
           this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");  //Make it rain code, given to us by Prof 
         }, 0);
+        const success = new Audio('https://hax.psu.edu/cdn/1.x.x/build/es6/node_modules/@lrnwebcomponents/app-hax/lib/assets/sounds/success.mp3');
+      success.play();
       } 
+      
     );
   }
 
   deleteUser(index) {
     this.usernames.splice(index, 1);  //Delete user method, where it is passed respective index from X button.
     this.requestUpdate();
+
+    const error = new Audio('https://www.myinstants.com/media/sounds/error_CDOxCYm.mp3');
+    error.play();
   }
   
 }
